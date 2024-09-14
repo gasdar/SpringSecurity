@@ -1,6 +1,5 @@
 package com.spring.security.app;
 
-import com.spring.security.app.configs.SecurityConfig;
 import com.spring.security.app.persistence.entities.PermissionEntity;
 import com.spring.security.app.persistence.entities.RoleEntity;
 import com.spring.security.app.persistence.entities.UserEntity;
@@ -10,24 +9,21 @@ import com.spring.security.app.persistence.repositories.UserRepository;
 import java.util.List;
 import java.util.Set;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootApplication
 public class SpringSecurityApplication {
-
-	@Autowired
-	private SecurityConfig security;
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringSecurityApplication.class, args);
 	}
 
 	@Bean
-	public CommandLineRunner init(UserRepository userRepository) {
+	public CommandLineRunner init(UserRepository userRepository, PasswordEncoder passwordEncoder) {
 		return args -> {
 
 			/* Create PERMISSIONS */
@@ -76,7 +72,7 @@ public class SpringSecurityApplication {
 			UserEntity userPepe = UserEntity
 				.builder()
 				.username("pepe")
-				.password(security.passwordEncoder().encode("12345"))
+				.password(passwordEncoder.encode("12345"))
 				.roles(Set.of(roleAdmin, roleUser))
 				.enabled(true)
 				.accountNonExpired(true)
@@ -87,7 +83,7 @@ public class SpringSecurityApplication {
 			UserEntity userMaria = UserEntity
 				.builder()
 				.username("maria")
-				.password(security.passwordEncoder().encode("12345"))
+				.password(passwordEncoder.encode("12345"))
 				.roles(Set.of(roleAdmin, roleUser))
 				.enabled(true)
 				.accountNonExpired(true)
@@ -98,7 +94,7 @@ public class SpringSecurityApplication {
 			UserEntity userRolan = UserEntity
 				.builder()
 				.username("rolan")
-				.password(security.passwordEncoder().encode("12345"))
+				.password(passwordEncoder.encode("12345"))
 				.roles(Set.of(roleDeveloper))
 				.enabled(true)
 				.accountNonExpired(true)
@@ -109,7 +105,7 @@ public class SpringSecurityApplication {
 			UserEntity userCamila = UserEntity
 				.builder()
 				.username("camila")
-				.password(security.passwordEncoder().encode("12345"))
+				.password(passwordEncoder.encode("12345"))
 				.roles(Set.of(roleDeveloper))
 				.enabled(true)
 				.accountNonExpired(true)
@@ -120,7 +116,7 @@ public class SpringSecurityApplication {
 			UserEntity userValentina = UserEntity
 				.builder()
 				.username("valentina")
-				.password(security.passwordEncoder().encode("12345"))
+				.password(passwordEncoder.encode("12345"))
 				.roles(Set.of(roleInvited))
 				.enabled(true)
 				.accountNonExpired(true)
@@ -131,7 +127,7 @@ public class SpringSecurityApplication {
 			UserEntity userMarco = UserEntity
 				.builder()
 				.username("marco")
-				.password(security.passwordEncoder().encode("12345"))
+				.password(passwordEncoder.encode("12345"))
 				.roles(Set.of(roleUser))
 				.enabled(true)
 				.accountNonExpired(true)
